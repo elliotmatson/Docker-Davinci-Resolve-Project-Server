@@ -1,0 +1,38 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.5
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=DaVinci
+      - TZ=America/Chicago
+    volumes:
+      - "resolve-db:/var/lib/postgresql/data"
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local:9.5
+    restart: always
+    volumes:
+      - "/share/(Whatever location you want backups stored):/backups"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=DaVinci
+      - POSTGRES_EXTRA_OPTS=--blobs --format=custom --quote-all-identifiers
+      - BACKUP_SUFFIX=.backup
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+      - TZ=America/Chicago
+volumes:
+    resolve-db:
