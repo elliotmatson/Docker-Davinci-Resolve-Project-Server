@@ -28,6 +28,7 @@ There are a lot of ways to host a Resolve project server, but each of them has t
 
 ## Configuration
 
+
 ## Installation
 
 ### QNAP Installation
@@ -36,7 +37,7 @@ Installing on a QNAP NAS is relatively simple:
 2. In Container Station, click "Create", then click "Create Application"
 3. Name your application whatever you like (eg. ResolveServer)
 4. Copy/Paste your modified docker-compose.yml file, hit "Validate YAML" to test it, and if it passes, click "Create"
-5. Container Station will download the files it needs and start the app. If it doesn't autostart after ~5 minutes, try clicking the play button for your app on the Overview tab
+5. Container Station will download the files it needs and start the app.
    
 
 ### Synology
