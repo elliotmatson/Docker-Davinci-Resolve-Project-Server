@@ -21,7 +21,7 @@ Simple Resolve project server with automatic backups
 
 ## Introduction
 
-There are a lot of ways to host a Resolve project server, but each of them has their own set of issues. The official project server requires manual backups, and other options can be complicated for those that don't have access to an IT team. Hopefully this is a simpler solution for smaller teams!
+There are a lot of ways to host a Resolve project server, but each of them has their own set of issues. The official project server requires manual backups, and other options can be complicated for those that don't have access to an IT team. Hopefully this is a more reliable and simpler solution for smaller teams!
 
 ### Features
 - **Lightweight** - Docker based, so doesn't require a full MacOS or Windows machine or VM.
