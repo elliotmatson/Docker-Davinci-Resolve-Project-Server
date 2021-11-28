@@ -12,6 +12,7 @@ Simple Resolve project server with automatic backups
     - [Synology](#synology)
     - [Linux](#linux)
   - [The Different PostgreSQL versions](#the-different-postgresql-versions)
+    - [Setting up a PostgreSQL 11 Project Server](#setting-up-a-postgresql-11-project-server)
     - [Using PostgreSQL 11 on Windows](#using-postgresql-11-on-windows)
     - [Using PostgreSQL on Mac](#using-postgresql-on-mac)
 
@@ -43,6 +44,29 @@ Generally, Resolve is not very tolerant of mismatched PostgreSQL versions. The W
 
 Resolve still uses a legacy feature that has been removed in PostgreSQL 12, so the latest major version that is useable is 11, which will be maintained until November 9, 2023. 
 
+### Setting up a PostgreSQL 11 Project Server
+To setup a PostgreSQL 11 server instead of 9.5, there are 2 lines that need to be changed in docker_compose.yml:
+```
+services:
+  postgres:
+    image: postgres:9.5
+    ...
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local:9.5
+    ...
+...
+```
+to the following:
+```
+services:
+  postgres:
+    image: postgres:11
+    ...
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local:11
+    ...
+...
+```
 ### Using PostgreSQL 11 on Windows
 1. **Uninstall PostgreSQL 9.5.4** - In your Windows application settings find PostgreSQL 9.5.4 and uninstall it.
 2. **Download PostgreSQL 11** - Download the latest Windows version of PostgreSQL 11 from [the EDB Downloads Page](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) and install it.
