@@ -16,7 +16,7 @@ Simple Resolve project server with automatic backups
   - [Different PostgreSQL versions](#different-postgresql-versions)
     - [Setting up a PostgreSQL 11 Project Server](#setting-up-a-postgresql-11-project-server)
     - [Using PostgreSQL 11 on Windows](#using-postgresql-11-on-windows)
-    - [Using PostgreSQL on Mac](#using-postgresql-on-mac)
+    - [Using PostgreSQL 11 on Mac](#using-postgresql-11-on-mac)
   - [Thanks](#thanks)
 
 ## Introduction
@@ -79,7 +79,7 @@ services:
 Many of these don't need to be edited, but here are the ones you might want to change:
 | Environment Variable  |Meaning|
 |---|---|
-| POSTGRES_DB | This is the name (or comma/space separated list of names) of the database from the previous step |
+| POSTGRES_DB | This is the name of the database from the previous step. Can also be a comma/space separated list of database names if you create more in the future |
 | POSTGRES_USER | This is the database username from the previous step |
 | POSTGRES_PASSWORD | This is the database password from the previous step |
 | SCHEDULE | This is a [cron string](https://www.freeformatter.com/cron-expression-generator-quartz.html) for how often backups are created. can be "@daily", "@every 1h", etc |
@@ -88,6 +88,7 @@ Many of these don't need to be edited, but here are the ones you might want to c
 | BACKUP_KEEP_MONTHS | Number of daily backups to keep before removal.
 | TZ                | This is your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
 
+Once you have configured these settings, save your modified docker-compose.yml file and move on to installation!
 
 ## Installation
 
@@ -145,7 +146,7 @@ services:
 2. **Download PostgreSQL 11** - Download the latest Windows version of PostgreSQL 11 from [the EDB Downloads Page](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) and install it.
 3. **Link Resolve to the new version** - Open Resolve, and connect to/open a PostgreSQL database. Start to run a database command (optimize, backup, restore) and Resolve will ask you to point it to PostgreSQL bin folder. This is inside the folder you picked in the PostgreSQL 11 installation, likely "C:\Program Files\PostgreSQL\11\bin"
 
-### Using PostgreSQL on Mac
+### Using PostgreSQL 11 on Mac
 Unfortunately, Resolve on a Mac doesn't have a way to point to a different version of PostgreSQL. From my limited tests, it seems that you can still connect to a PostgreSQL 11 server from a Mac, you just won't be able to optimize, backup, or restore your database.
 ## Thanks
 -[prodrigestivill](https://github.com/prodrigestivill/) for his [PostgreSQL Backup docker image](https://github.com/prodrigestivill/docker-postgres-backup-local)
