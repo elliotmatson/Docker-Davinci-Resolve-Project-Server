@@ -53,12 +53,15 @@ services:
 | TZ                | This is your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
 
 ### Backup Server
-To configure the backups, we'll want to configure the environment variables below:
+To configure the backups, we'll want to configure the variables below:
 ```
 ...
 services:
   ...
   pgbackups:
+    ...
+    volumes:
+      - "(Whatever location you want backups stored):/backups"
     ...
     environment:
       - POSTGRES_HOST=postgres
@@ -76,7 +79,21 @@ services:
     ...
 ...
 ```
-Many of these don't need to be edited, but here are the ones you might want to change:
+First, we will want to decide on a backup location and edit the ```volumes:``` section You will need the full path to the folder you want backups stored in. On a QNAP NAS for example, if I wanted to use a folder called "Backups" inside a shared folder named "Videos", the path would be ```/shares/Videos/Backups/```, and my ```volumes:``` section would look like this:
+```yaml
+volumes:
+      - "/shares/Videos/Backups:/backups"
+```
+ On Ubuntu, if I wanted to use a folder named "Backups" in the home directory of the user named "johndoe", the path would be ```/home/johndoe/Backups/```, and my ```volumes:``` section would look like this:
+```yaml
+volumes:
+      - "/home/johndoe/Backups:/backups"
+```
+
+
+
+
+There are also some variables in the environment section. Many of these don't need to be edited, but here are the ones you might want to change:
 | Environment Variable  |Meaning|
 |---|---|
 | POSTGRES_DB | This is the name of the database from the previous step. Can also be a comma/space separated list of database names if you create more in the future |
