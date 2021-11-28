@@ -79,7 +79,7 @@ services:
     ...
 ...
 ```
-First, we will want to decide on a backup location and edit the ```volumes:``` section You will need the full path to the folder you want backups stored in. On a QNAP NAS for example, if I wanted to use a folder called "Backups" inside a shared folder named "Videos", the path would be ```/shares/Videos/Backups/```, and my ```volumes:``` section would look like this:
+First, we will want to decide on a backup location and edit the ```volumes:``` section. You will need the full path to the folder you want backups stored in. On a QNAP NAS for example, if I wanted to use a folder called "Backups" inside a shared folder named "Videos", the path would be ```/shares/Videos/Backups/```, and my ```volumes:``` section would look like this:
 ```yaml
 volumes:
       - "/shares/Videos/Backups:/backups"
