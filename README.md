@@ -46,7 +46,7 @@ Resolve still uses a legacy feature that has been removed in PostgreSQL 12, so t
 
 ### Setting up a PostgreSQL 11 Project Server
 To setup a PostgreSQL 11 server instead of 9.5, there are 2 lines that need to be changed in docker_compose.yml:
-```
+```yaml
 services:
   postgres:
     image: postgres:9.5
@@ -57,7 +57,7 @@ services:
 ...
 ```
 to the following:
-```
+```yaml
 services:
   postgres:
     image: postgres:11
