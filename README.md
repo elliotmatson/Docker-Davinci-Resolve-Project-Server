@@ -6,31 +6,38 @@ Simple Resolve project server with automatic backups
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
     - [Features](#features)
-  - [Backup Configuration](#backup-configuration)
+  - [Configuration](#configuration)
   - [Installation](#installation)
-    - [QNAP](#qnap)
+    - [QNAP Installation](#qnap-installation)
     - [Synology](#synology)
     - [Linux](#linux)
   - [The Different PostgreSQL versions](#the-different-postgresql-versions)
     - [Setting up a PostgreSQL 11 Project Server](#setting-up-a-postgresql-11-project-server)
     - [Using PostgreSQL 11 on Windows](#using-postgresql-11-on-windows)
     - [Using PostgreSQL on Mac](#using-postgresql-on-mac)
+  - [Thanks](#thanks)
 
 ## Introduction
 
-There are a lot of ways to host a Resolve project server, but each of them has their own set of issues. 
+There are a lot of ways to host a Resolve project server, but each of them has their own set of issues. The official project server requires manual backups, and other options can be complicated for those that don't have access to an IT team. Hopefully this is a simpler solution for smaller teams!
 
 ### Features
 - **Lightweight** - Docker based, so doesn't require a full MacOS or Windows machine or VM.
-- **Platform Independant** - can be installed on Windows, Mac, Linux, QNAP, Synology, RPi, really anything that can run Docker.
+- **Platform Independent** - can be installed on Windows, Mac, Linux, QNAP, Synology, RPi, really anything that can run Docker.
 - **Compatible with Resolve's existing backup/restore functions** - All backup files use the standard *.backup file syntax that Resolve uses, unlike many of the PostgreSQL backup solutions that exist now.
 
-## Backup Configuration
+## Configuration
 
 ## Installation
 
-### QNAP
-(to be continued)
+### QNAP Installation
+Installing on a QNAP NAS is relatively simple:
+1. If you don't already have it, install Container Station from the QNAP app store.
+2. In Container Station, click "Create", then click "Create Application"
+3. Name your application whatever you like (eg. ResolveServer)
+4. Copy/Paste your modified docker-compose.yml file, hit "Validate YAML" to test it, and if it passes, click "Create"
+5. Container Station will download the files it needs and start the app. If it doesn't autostart after ~5 minutes, try clicking the play button for your app on the Overview tab
+   
 
 ### Synology
 (to be continued)
@@ -74,3 +81,5 @@ services:
 
 ### Using PostgreSQL on Mac
 Unfortunately, Resolve on a Mac doesn't have a way to point to a different version of PostgreSQL. From my limited tests, it seems that you can still connect to a PostgreSQL 11 server from a Mac, you just won't be able to optimize, backup, or restore your database.
+## Thanks
+-[prodrigestivill](https://github.com/prodrigestivill/) for his [PostgreSQL Backup docker image](https://github.com/prodrigestivill/docker-postgres-backup-local)
