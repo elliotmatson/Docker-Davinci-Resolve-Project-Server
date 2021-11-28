@@ -11,7 +11,7 @@ Simple Resolve project server with automatic backups
     - [QNAP Installation](#qnap-installation)
     - [Synology](#synology)
     - [Linux](#linux)
-  - [The Different PostgreSQL versions](#the-different-postgresql-versions)
+  - [Different PostgreSQL versions](#different-postgresql-versions)
     - [Setting up a PostgreSQL 11 Project Server](#setting-up-a-postgresql-11-project-server)
     - [Using PostgreSQL 11 on Windows](#using-postgresql-11-on-windows)
     - [Using PostgreSQL on Mac](#using-postgresql-on-mac)
@@ -37,17 +37,22 @@ Installing on a QNAP NAS is relatively simple:
 2. In Container Station, click "Create", then click "Create Application"
 3. Name your application whatever you like (eg. ResolveServer)
 4. Copy/Paste your modified docker-compose.yml file, hit "Validate YAML" to test it, and if it passes, click "Create"
-5. Container Station will download the files it needs and start the app.
+5. Container Station will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your QNAP using the database name and credentials
    
 
 ### Synology
 (to be continued)
 
 ### Linux
-(to be continued)
+1. Follow the [Docker installation instructions for your Linux distribution](https://docs.docker.com/engine/install/)
+2. Install [Docker Compose](https://docs.docker.com/compose/install/)
+3. Move your modified docker-compose.yml file to a folder on your Linux machine, then navigate to that folder in the terminal. 
+4. Run: 
+```docker-compose up -d```
+5. Docker-compose will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your QNAP using the database name and credentials
 
 
-## The Different PostgreSQL versions
+## Different PostgreSQL versions
 Generally, Resolve is not very tolerant of mismatched PostgreSQL versions. The Windows version of Resolve installs 9.5.4, and the Mac version installs 9.5.19. Unfortunately the major release 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure. Since most people are still using the default Resolve credentials for their server, security generally isn't the biggest concern, but if you are trying to secure your project server, you will want to move to a supported version of PostgreSQL.
 
 Resolve still uses a legacy feature that has been removed in PostgreSQL 12, so the latest major version that is useable is 11, which will be maintained until November 9, 2023. 
