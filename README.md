@@ -39,7 +39,7 @@ There are a lot of ways to host a Resolve project server, but each of them has t
 
 
 ## The Different PostgreSQL versions
-Generally, Resolve is not very tolerant of mismatched PostgreSQL verions. The Windows version of Resolve installs 9.5.4, and the Mac version installs 9.5.19. Unfortunately version 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure. Since most people are still using the default Resolve credentials for their server, security generally isn't the biggest concern, but if you are trying to secure your project server, you will want to move to a supported version of PostgreSQL.
+Generally, Resolve is not very tolerant of mismatched PostgreSQL verions. The Windows version of Resolve installs 9.5.4, and the Mac version installs 9.5.19. Unfortunately the major release 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure. Since most people are still using the default Resolve credentials for their server, security generally isn't the biggest concern, but if you are trying to secure your project server, you will want to move to a supported version of PostgreSQL.
 
 Resolve still uses a legacy feature that has been removed in PostgreSQL 12, so the latest major version that is useable is 11, which will be maintained until November 9, 2023. 
 
