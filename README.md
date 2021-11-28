@@ -49,4 +49,4 @@ Resolve still uses a legacy feature that has been removed in PostgreSQL 12, so t
 3. **Link Resolve to the new version** - Open Resolve, and connect to/open a PostgreSQL database. Start to run a database command (optimize, backup, restore) and Resolve will ask you to point it to PostgreSQL bin folder. This is inside the folder you picked in the PostgreSQL 11 installation, likely "C:\Program Files\PostgreSQL\11\bin"
 
 ### Using PostgreSQL on Mac
-Unfortunately, Resolve on a Mac doesn't have a way to point to a different version of PostgreSQL. You can still connect to a PostgreSQL 11 server from a Mac, you just won't be able to optimize, backup, or restore your database.
+Unfortunately, Resolve on a Mac doesn't have a way to point to a different version of PostgreSQL. From my limited tests, it seems that you can still connect to a PostgreSQL 11 server from a Mac, you just won't be able to optimize, backup, or restore your database.
