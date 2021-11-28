@@ -26,12 +26,12 @@ There are a lot of ways to host a Resolve project server, but each of them has t
 ### Features
 - **Lightweight** - Docker based, so doesn't require a full MacOS or Windows machine or VM.
 - **Platform Independent** - can be installed on Windows, Mac, Linux, QNAP, Synology, RPi, really anything that can run Docker.
-- **Compatible with Resolve's existing backup/restore functions** - All backup files use the standard *.backup file syntax that Resolve uses, unlike many of the PostgreSQL backup solutions that exist now.
+- **Compatible with Resolve's existing backup/restore functions** - All backup files use the standard Resolve *.backup file syntax, and can be restored from the Resolve UI
 
 ## Configuration
 There are a few things we'll need to edit in the docker-compose.yml file to configure our installation:
 ### PostgreSQL Server
-We'll want to configure the environment variables below:
+To configure the server itself, we'll want to configure the environment variables below:
 ```
 ...
 services:
