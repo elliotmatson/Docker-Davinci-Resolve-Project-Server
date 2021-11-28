@@ -7,6 +7,8 @@ Simple Resolve project server with automatic backups
   - [Introduction](#introduction)
     - [Features](#features)
   - [Configuration](#configuration)
+    - [PostgreSQL Server](#postgresql-server)
+    - [Backup Server](#backup-server)
   - [Installation](#installation)
     - [QNAP Installation](#qnap-installation)
     - [Synology](#synology)
@@ -27,6 +29,64 @@ There are a lot of ways to host a Resolve project server, but each of them has t
 - **Compatible with Resolve's existing backup/restore functions** - All backup files use the standard *.backup file syntax that Resolve uses, unlike many of the PostgreSQL backup solutions that exist now.
 
 ## Configuration
+There are a few things we'll need to edit in the docker-compose.yml file to configure our installation:
+### PostgreSQL Server
+We'll want to configure the environment variables below:
+```
+...
+services:
+  postgres:
+    ...
+    environment:
+      - POSTGRES_DB=database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=DaVinci
+      - TZ=America/Chicago
+    ...
+...
+```
+| Environment Variable  |Meaning|
+|---|---|
+| POSTGRES_DB       | This is the name of your database. Name it whatever you like. |
+| POSTGRES_USER     | This is the username you will use to connect to your database. The Resolve default is "postgres"  |
+| POSTGRES_PASSWORD | This is the password you will use to connect to your database. The Resolve default is "DaVinci"  |
+| TZ                | This is your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
+
+### Backup Server
+To configure the backups, we'll want to configure the environment variables below:
+```
+...
+services:
+  ...
+  pgbackups:
+    ...
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=DaVinci
+      - POSTGRES_EXTRA_OPTS=--blobs --format=custom --quote-all-identifiers
+      - BACKUP_SUFFIX=.backup
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+      - TZ=America/Chicago
+    ...
+...
+```
+Many of these don't need to be edited, but here are the ones you might want to change:
+| Environment Variable  |Meaning|
+|---|---|
+| POSTGRES_DB | This is the name (or comma/space separated list of names) of the database from the previous step |
+| POSTGRES_USER | This is the database username from the previous step |
+| POSTGRES_PASSWORD | This is the database password from the previous step |
+| SCHEDULE | This is a [cron string](https://www.freeformatter.com/cron-expression-generator-quartz.html) for how often backups are created. can be "@daily", "@every 1h", etc |
+| BACKUP_KEEP_DAYS | Number of daily backups to keep before removal.
+| BACKUP_KEEP_WEEKS | Number of weekly backups to keep before removal.
+| BACKUP_KEEP_MONTHS | Number of daily backups to keep before removal.
+| TZ                | This is your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
 
 
 ## Installation
