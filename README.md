@@ -14,6 +14,7 @@ Simple Resolve project server with automatic backups
   - [The Different PostgreSQL versions](#the-different-postgresql-versions)
     - [Using PostgreSQL 11 on Windows](#using-postgresql-11-on-windows)
     - [Using PostgreSQL on Mac](#using-postgresql-on-mac)
+  - [Thanks](#thanks)
 
 ## Introduction
 
@@ -50,3 +51,6 @@ Resolve still uses a legacy feature that has been removed in PostgreSQL 12, so t
 
 ### Using PostgreSQL on Mac
 Unfortunately, Resolve on a Mac doesn't have a way to point to a different version of PostgreSQL. You can still connect to a PostgreSQL 11 server from a Mac, you just won't be able to optimize, backup, or restore your database.
+
+## Thanks
+(to be continued)
