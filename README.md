@@ -32,7 +32,7 @@ There are a lot of ways to host a Resolve project server, but each of them has t
 There are a few things we'll need to edit in the docker-compose.yml file to configure our installation:
 ### PostgreSQL Server
 To configure the server itself, we'll want to configure the environment variables below:
-```
+```yaml
 ...
 services:
   postgres:
@@ -54,7 +54,7 @@ services:
 
 ### Backup Server
 To configure the backups, we'll want to configure the variables below:
-```
+```yaml
 ...
 services:
   ...
