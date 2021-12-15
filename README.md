@@ -110,7 +110,7 @@ Once you have configured these settings, save your modified docker-compose.yml f
 ## Installation
 
 ### QNAP Installation
-Installing on a QNAP NAS is relatively simple:
+Installing on a QNAP NAS is relatively simple. One note, please  put the database files on an SSD. You will thank me later
 1. If you don't already have it, install Container Station from the QNAP app store.
 2. In Container Station, click "Create", then click "Create Application"
 3. Name your application whatever you like (eg. ResolveServer)
