@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgres:
-    image: postgres:9.5
+    image: postgres:13
     restart: always
     ports:
       - "5432:5432"
@@ -13,7 +13,7 @@ services:
     volumes:
       - "resolve-db:/var/lib/postgresql/data"
   pgbackups:
-    image: prodrigestivill/postgres-backup-local:9.5
+    image: prodrigestivill/postgres-backup-local:13
     restart: always
     volumes:
       - "(Whatever location you want backups stored):/backups"
