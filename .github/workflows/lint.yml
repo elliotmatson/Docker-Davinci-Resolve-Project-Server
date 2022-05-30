@@ -7,22 +7,17 @@ name: Lint
       - master
 
 jobs:
-
   test:
     name: Lint
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v3
-
       - name: Set up Python 3.7.
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-
       - name: Install test dependencies.
         run: pip3 install yamllint
-
       - name: Run yamllint.
         run: yamllint .
