@@ -9,7 +9,7 @@ on:
 jobs:
   run-lint:
     name: Lint
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     
     steps:
     
