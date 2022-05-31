@@ -7,17 +7,21 @@ on:
     branches: [main]
 
 jobs:
-  yaml-lint:
+  run-lint:
     name: Lint
     runs-on: ubuntu-latest
+    
     steps:
+    
       - name: Check out the codebase.
         uses: actions/checkout@v3
-      - name: Set up Python 3.7.
-        uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
-      - name: Install test dependencies.
-        run: pip3 install yamllint
-      - name: Run yamllint.
-        run: yamllint .
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
