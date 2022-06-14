@@ -17,7 +17,7 @@ services:
     image: prodrigestivill/postgres-backup-local:13
     restart: always
     volumes:
-      - "(Whatever location you want backups stored):/backups"
+      - "(location you want backups stored):/backups"
     links:
       - postgres
     depends_on:
