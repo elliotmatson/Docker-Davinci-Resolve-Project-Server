@@ -62,7 +62,7 @@ To configure the server itself, we'll want to configure the environment variable
 | POSTGRES_USER     | Username you will use to connect to your database. The Resolve default is "postgres"  |
 | POSTGRES_PASSWORD | Password you will use to connect to your database. The Resolve default is "DaVinci"  |
 | TZ                | Your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
-| POSTGRES_LOCATION | Location your database will be stored. See [Volume Locations](###Volume-Locations) |
+| POSTGRES_LOCATION | Location your database will be stored. See [Volume Locations](#volume-locations) |
 
 ### Backups
 To configure the backups, we'll want to configure the variables below:
@@ -72,7 +72,7 @@ To configure the backups, we'll want to configure the variables below:
 | BACKUP_KEEP_DAYS    | Number of daily backups to keep before removal.  |
 | BACKUP_KEEP_WEEKS   | Number of weekly backups to keep before removal.  |
 | BACKUP_KEEP_MONTHS  | Number of daily backups to keep before removal.  |
-| BACKUP_LOCATION     | Location your backups will be stored. See [Volume Locations](###Volume-Locations) |
+| BACKUP_LOCATION     | Location your backups will be stored. See [Volume Locations](#volume-locations) |
 
 ### PGAdmin
 To configure PGAdmin, we'll want to configure the variables below:
