@@ -55,7 +55,7 @@ services:
       BACKUP_SUFFIX: .backup
       HEALTHCHECK_PORT: 8080
   pgadmin:
-    container_name: resolve_pgadmin4
+    container_name: resolve_pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:
