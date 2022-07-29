@@ -1,5 +1,29 @@
 ---
-version: '3'
+version: '3.8'
+x-common:
+  database: &db-environment
+    POSTGRES_DB: database
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: DaVinci
+    TZ: America/Chicago
+    POSTGRES_LOCATION: &db-location "???:/var/lib/postgresql/data"
+  backup: &backup-environment
+    SCHEDULE: "@daily"
+    BACKUP_KEEP_DAYS: 7
+    BACKUP_KEEP_WEEKS: 4
+    BACKUP_KEEP_MONTHS: 6
+    BACKUP_LOCATION: &bk-location "???:/backups"
+  admin: &admin-environment
+    PGADMIN_DEFAULT_EMAIL: admin@admin.com
+    PGADMIN_DEFAULT_PASSWORD: root
+    #PGADMIN_CONFIG_DEFAULT_SERVER: postgres
+#
+# ------------------------------------------------------------------------------------------
+# DANGER ZONE BELOW
+#
+# The remainder of this file likely does not need to be changed. Please only make modifications
+# below if you understand what you are doing.
+#
 services:
   postgres:
     image: postgres:13
@@ -7,33 +31,27 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=database
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=DaVinci
-      - TZ=America/Chicago
+      <<: [*db-environment]
     volumes:
-      - "resolve-db:/var/lib/postgresql/data"
+      - *db-location
   pgbackups:
     image: prodrigestivill/postgres-backup-local:13
     restart: always
     volumes:
-      - "(location you want backups stored):/backups"
+      - *bk-location
     links:
       - postgres
-    depends_on:
-      - postgres
     environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_DB=database
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=DaVinci
-      - POSTGRES_EXTRA_OPTS=--blobs --format=custom --quote-all-identifiers
-      - BACKUP_SUFFIX=.backup
-      - SCHEDULE=@daily
-      - BACKUP_KEEP_DAYS=7
-      - BACKUP_KEEP_WEEKS=4
-      - BACKUP_KEEP_MONTHS=6
-      - HEALTHCHECK_PORT=8080
-      - TZ=America/Chicago
-volumes:
-  resolve-db:
+      <<: [*db-environment, *backup-environment]
+      POSTGRES_HOST: postgres
+      POSTGRES_EXTRA_OPTS: --blobs --format=custom --quote-all-identifiers
+      BACKUP_SUFFIX: .backup
+      HEALTHCHECK_PORT: 8080
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      <<: [*admin-environment]
+    ports:
+      - "6969:80"
