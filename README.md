@@ -119,7 +119,7 @@ Installing on a QNAP NAS is relatively simple. One note, please  put the databas
    
 
 ### Synology
-See #5
+See [#5](https://github.com/elliotmatson/Docker-Davinci-Resolve-Project-Server/issues/5)
 
 ### Linux
 1. Follow the [Docker installation instructions for your Linux distribution](https://docs.docker.com/engine/install/)
