@@ -24,7 +24,7 @@ Simple Resolve project server with automatic backups
 There are a lot of ways to host a Resolve project server, but each of them has their own set of issues. The official project server requires manual backups, and other options can be complicated for those that don't have access to an IT team. Hopefully this is a more reliable and simpler solution for smaller teams!
 
 ### Features
-- **Lightweight** - Docker based, so doesn't require a full MacOS or Windows machine or VM.
+- **Lightweight** - Docker based, so doesn't require a full macOS or Windows machine or VM.
 - **Platform Independent** - can be installed on Windows, Mac, Linux, QNAP, Synology, RPi, really anything that can run Docker.
 - **Compatible with Resolve's existing backup/restore functions** - All backup files use the standard Resolve *.backup file syntax, and can be restored from the Resolve UI
 
@@ -116,7 +116,7 @@ Installing on a QNAP NAS is relatively simple. One note, please  put the databas
 3. Name your application whatever you like (eg. ResolveServer)
 4. Copy/Paste your modified docker-compose.yml file, hit "Validate YAML" to test it, and if it passes, click "Create"
 5. Container Station will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your QNAP using the database name and credentials
-   
+
 
 ### Synology
 See [#5](https://github.com/elliotmatson/Docker-Davinci-Resolve-Project-Server/issues/5)
@@ -124,16 +124,17 @@ See [#5](https://github.com/elliotmatson/Docker-Davinci-Resolve-Project-Server/i
 ### Linux
 1. Follow the [Docker installation instructions for your Linux distribution](https://docs.docker.com/engine/install/)
 2. Install [Docker Compose](https://docs.docker.com/compose/install/)
-3. Move your modified docker-compose.yml file to a folder on your Linux machine, then navigate to that folder in the terminal. 
-4. Run: 
+3. Move your modified docker-compose.yml file to a folder on your Linux machine, then navigate to that folder in the terminal.
+4. Run:
 ```docker-compose up -d```
 5. Docker-compose will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your QNAP using the database name and credentials
 
 
 ## Different PostgreSQL versions
-Generally, Resolve is not very tolerant of mismatched PostgreSQL versions. Resolve 18 uses PostgreSQL 13, which is what this repo now defaults to. Resolve 17 and below use PostgreSQL 9.5. Unfortunately the major release 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure. Since most people are still using the default Resolve credentials for their server, security generally isn't the biggest concern, but if you are trying to secure your project server with an older version of Resolve, you will want to move to a supported version of PostgreSQL.
+Generally, Resolve is not very tolerant of mismatched PostgreSQL versions. Resolve 18 uses PostgreSQL 13, which is what this repository now defaults to. Resolve 17 and below use PostgreSQL 9.5. Unfortunately the major release 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure. 
+Since most people are still using the default Resolve credentials for their server, security generally isn't the biggest concern, but if you are trying to secure your project server with an older version of Resolve, you will want to move to a supported version of PostgreSQL.
 
-Resolve 17 and below still use a legacy feature that has been removed in PostgreSQL 12, so the latest major version that is useable is 11, which will be maintained until November 9, 2023. 
+Resolve 17 and below still use a legacy feature that has been removed in PostgreSQL 12, so the latest major version that is useable is 11, which will be maintained until November 9, 2023.
 
 ### Setting up a PostgreSQL 9.5 or 11 Project Server
 To setup a PostgreSQL 9.5 or 11 server instead of 13, there are 2 lines that need to be changed in docker_compose.yml:
