@@ -26,6 +26,7 @@ x-common:
 #
 services:
   postgres:
+    container_name: resolve_pgsql
     image: postgres:13
     restart: always
     ports:
@@ -40,6 +41,7 @@ services:
       timeout: 5s
       retries: 5
   pgbackups:
+    container_name: resolve_pgbackup
     image: prodrigestivill/postgres-backup-local:13
     restart: always
     volumes:
@@ -53,7 +55,7 @@ services:
       BACKUP_SUFFIX: .backup
       HEALTHCHECK_PORT: 8080
   pgadmin:
-    container_name: pgadmin4_container
+    container_name: resolve_pgadmin4
     image: dpage/pgadmin4
     restart: always
     environment:
