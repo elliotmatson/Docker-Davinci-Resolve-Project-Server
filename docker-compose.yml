@@ -16,7 +16,7 @@ x-common:
   admin: &admin-environment
     PGADMIN_DEFAULT_EMAIL: admin@admin.com
     PGADMIN_DEFAULT_PASSWORD: root
-    #PGADMIN_CONFIG_DEFAULT_SERVER: postgres
+    PGADMIN_PORT: &pgadmin-port "3001:80"
 #
 # ------------------------------------------------------------------------------------------
 # DANGER ZONE BELOW
@@ -54,4 +54,4 @@ services:
     environment:
       <<: [*admin-environment]
     ports:
-      - "6969:80"
+      - *pgadmin-port
