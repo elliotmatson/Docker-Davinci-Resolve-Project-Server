@@ -14,7 +14,7 @@ jobs:
       - name: Deploy the stack
         run: docker-compose up -d
 
-      - name: Test PGAdmin
+      - name: Test PGAdmin container
         run: docker run --network container:resolve_pgadmin appropriate/curl -s --retry 10 --retry-connrefused http://localhost/
 
       - name: Setup tmate session
