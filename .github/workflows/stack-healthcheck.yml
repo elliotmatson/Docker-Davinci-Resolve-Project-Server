@@ -1,0 +1,19 @@
+---
+name: Stack Healthcheck
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test Stack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy the stack
+        run: docker-compose up -d
+
+      - name: Test PGAdmin
+        run: docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3001/
