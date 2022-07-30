@@ -1,4 +1,5 @@
 # Davinci Resolve Project Server
+![Lint](https://github.com/github/docs/actions/workflows/lint.yml/badge.svg) ![Healthcheck](https://github.com/github/docs/actions/workflows/stack-healthcheck.yml/badge.svg)
 Simple Resolve project server with automatic backups
 
 ## Table of Contents
