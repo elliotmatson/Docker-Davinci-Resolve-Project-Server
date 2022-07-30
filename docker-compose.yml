@@ -74,7 +74,7 @@ services:
   pgadmin-config:
     container_name: resolve_pgadmin-config-creator
     image: ghcr.io/elliotmatson/pgadmin-config-creator:latest
-    restart: always
+    restart: on-failure
     environment:
       <<: [*db-environment]
     volumes:
