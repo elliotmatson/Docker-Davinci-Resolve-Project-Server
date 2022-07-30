@@ -12,8 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy the stack
-        run: timeout 5 docker-compose up -d
+        run: timeout 120 docker-compose up -d
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        if: ${{ failure() }}
