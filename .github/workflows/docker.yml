@@ -9,7 +9,7 @@
 # You can also reference a tag or branch, 
 # but the action may change without warning.
 
-name: Create and publish a Docker image
+name: Docker Build, Push
 
 on:
   push:
