@@ -65,7 +65,7 @@ services:
     ports:
       - *pgadmin-port
     volumes:
-      - pgadmin-config/servers.json:/pgadmin4/servers.json:ro
+      - pgadmin-config:/pgadmin4
     depends_on:
       - postgres
       - pgadmin-config
