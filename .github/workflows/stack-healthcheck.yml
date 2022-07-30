@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy the stack
-        run: timeout 120 docker-compose up --wait
+      - name: Deploy the stack, timeout if not healthy after 2m
+        run: timeout 120 docker compose up --wait
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
