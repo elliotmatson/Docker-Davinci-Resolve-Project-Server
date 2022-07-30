@@ -1,39 +1,85 @@
 ---
-version: '3'
+version: '3.8'
+x-common:
+  database: &db-environment
+    POSTGRES_DB: database
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: DaVinci
+    TZ: America/Chicago
+    POSTGRES_LOCATION: &db-location "~/db:/var/lib/postgresql/data"
+  backup: &backup-environment
+    SCHEDULE: "@daily"
+    BACKUP_KEEP_DAYS: 7
+    BACKUP_KEEP_WEEKS: 4
+    BACKUP_KEEP_MONTHS: 6
+    BACKUP_LOCATION: &bk-location "~/backups:/backups"
+  admin: &admin-environment
+    PGADMIN_DEFAULT_EMAIL: admin@admin.com
+    PGADMIN_DEFAULT_PASSWORD: root
+    PGADMIN_PORT: &pgadmin-port "3001:80"
+#
+# ------------------------------------------------------------------------------------------
+# DANGER ZONE BELOW
+#
+# The remainder of this file likely does not need to be changed. 
+# Please only make modifications
+# below if you understand what you are doing.
+#
 services:
   postgres:
+    container_name: resolve_pgsql
     image: postgres:13
     restart: always
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=database
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=DaVinci
-      - TZ=America/Chicago
+      <<: [*db-environment]
     volumes:
-      - "resolve-db:/var/lib/postgresql/data"
+      - *db-location
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   pgbackups:
+    container_name: resolve_pgbackup
     image: prodrigestivill/postgres-backup-local:13
     restart: always
     volumes:
-      - "(location you want backups stored):/backups"
-    links:
-      - postgres
+      - *bk-location
     depends_on:
       - postgres
     environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_DB=database
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=DaVinci
-      - POSTGRES_EXTRA_OPTS=--blobs --format=custom --quote-all-identifiers
-      - BACKUP_SUFFIX=.backup
-      - SCHEDULE=@daily
-      - BACKUP_KEEP_DAYS=7
-      - BACKUP_KEEP_WEEKS=4
-      - BACKUP_KEEP_MONTHS=6
-      - HEALTHCHECK_PORT=8080
-      - TZ=America/Chicago
+      <<: [*db-environment, *backup-environment]
+      POSTGRES_HOST: postgres
+      POSTGRES_EXTRA_OPTS: --blobs --format=custom --quote-all-identifiers
+      BACKUP_SUFFIX: .backup
+      HEALTHCHECK_PORT: 8080
+    healthcheck:
+      interval: 30s
+  pgadmin:
+    container_name: resolve_pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      <<: [*admin-environment]
+    ports:
+      - *pgadmin-port
+    volumes:
+      - pgadmin-config:/pgadmin4
+    depends_on:
+      - postgres
+      - pgadmin-config
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost/ || exit 1"]
+  pgadmin-config:
+    container_name: resolve_pgadmin-config-creator
+    image: ghcr.io/elliotmatson/pgadmin-config-creator:latest
+    restart: on-failure
+    environment:
+      <<: [*db-environment]
+    volumes:
+      - pgadmin-config:/config
+
 volumes:
-  resolve-db:
+  pgadmin-config:

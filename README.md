@@ -7,16 +7,16 @@ Simple Resolve project server with automatic backups
   - [Introduction](#introduction)
     - [Features](#features)
   - [Configuration](#configuration)
-    - [PostgreSQL Server](#postgresql-server)
-    - [Backup Server](#backup-server)
+    - [Database](#database)
+    - [Backups](#backups)
+    - [PGAdmin](#pgadmin)
+    - [Volume Locations](#volume-locations)
   - [Installation](#installation)
     - [QNAP Installation](#qnap-installation)
     - [Synology](#synology)
     - [Linux](#linux)
   - [Different PostgreSQL versions](#different-postgresql-versions)
-    - [Setting up a PostgreSQL 11 Project Server](#setting-up-a-postgresql-11-project-server)
-    - [Using PostgreSQL 11 on Windows](#using-postgresql-11-on-windows)
-    - [Using PostgreSQL 11 on Mac](#using-postgresql-11-on-mac)
+    - [Setting up a PostgreSQL 9.5 or 11 Project Server](#setting-up-a-postgresql-95-or-11-project-server)
   - [Thanks](#thanks)
 
 ## Introduction
@@ -27,83 +27,72 @@ There are a lot of ways to host a Resolve project server, but each of them has t
 - **Lightweight** - Docker based, so doesn't require a full macOS or Windows machine or VM.
 - **Platform Independent** - can be installed on Windows, Mac, Linux, QNAP, Synology, RPi, really anything that can run Docker.
 - **Compatible with Resolve's existing backup/restore functions** - All backup files use the standard Resolve *.backup file syntax, and can be restored from the Resolve UI
+- **Built-in PGAdmin Server** - PGAdmin is a tool for administering a PostgreSQL Server, and is helpful for diagnosing problems and migrating/updating entire servers
 
 ## Configuration
-There are a few things we'll need to edit in the docker-compose.yml file to configure our installation:
-### PostgreSQL Server
+There are a few things we'll need to edit at the top of the docker-compose.yml file to configure our installation:
+```yaml
+---
+version: '3.8'
+x-common:
+  database: &db-environment
+    POSTGRES_DB: database
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: DaVinci
+    TZ: America/Chicago
+    POSTGRES_LOCATION: &db-location "???:/var/lib/postgresql/data"
+  backup: &backup-environment
+    SCHEDULE: "@daily"
+    BACKUP_KEEP_DAYS: 7
+    BACKUP_KEEP_WEEKS: 4
+    BACKUP_KEEP_MONTHS: 6
+    BACKUP_LOCATION: &bk-location "???:/backups"
+  admin: &admin-environment
+    PGADMIN_DEFAULT_EMAIL: admin@admin.com
+    PGADMIN_DEFAULT_PASSWORD: root
+    PGADMIN_PORT: &pgadmin-port "3001:80"
+...
+```
+
+### Database
 To configure the server itself, we'll want to configure the environment variables below:
-```yaml
-...
-services:
-  postgres:
-    ...
-    environment:
-      - POSTGRES_DB=database
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=DaVinci
-      - TZ=America/Chicago
-    ...
-...
-```
 | Environment Variable  |Meaning|
 |---|---|
-| POSTGRES_DB       | This is the name of your database. Name it whatever you like. |
-| POSTGRES_USER     | This is the username you will use to connect to your database. The Resolve default is "postgres"  |
-| POSTGRES_PASSWORD | This is the password you will use to connect to your database. The Resolve default is "DaVinci"  |
-| TZ                | This is your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
+| POSTGRES_DB       | Nme of your database. Name it whatever you like. |
+| POSTGRES_USER     | Username you will use to connect to your database. The Resolve default is "postgres"  |
+| POSTGRES_PASSWORD | Password you will use to connect to your database. The Resolve default is "DaVinci"  |
+| TZ                | Your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
+| POSTGRES_LOCATION | Location your database will be stored. See [Volume Locations](#volume-locations) |
 
-### Backup Server
+### Backups
 To configure the backups, we'll want to configure the variables below:
-```yaml
-...
-services:
-  ...
-  pgbackups:
-    ...
-    volumes:
-      - "(Whatever location you want backups stored):/backups"
-    ...
-    environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_DB=database
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=DaVinci
-      - POSTGRES_EXTRA_OPTS=--blobs --format=custom --quote-all-identifiers
-      - BACKUP_SUFFIX=.backup
-      - SCHEDULE=@daily
-      - BACKUP_KEEP_DAYS=7
-      - BACKUP_KEEP_WEEKS=4
-      - BACKUP_KEEP_MONTHS=6
-      - HEALTHCHECK_PORT=8080
-      - TZ=America/Chicago
-    ...
-...
-```
-First, we will want to decide on a backup location and edit the ```volumes:``` section. You will need the full path to the folder you want backups stored in. On a QNAP NAS for example, if I wanted to use a folder called "Backups" inside a shared folder named "Videos", the path would be ```/shares/Videos/Backups/```, and my ```volumes:``` section would look like this:
-```yaml
-volumes:
-      - "/shares/Videos/Backups:/backups"
-```
- On Ubuntu, if I wanted to use a folder named "Backups" in the home directory of the user named "johndoe", the path would be ```/home/johndoe/Backups/```, and my ```volumes:``` section would look like this:
-```yaml
-volumes:
-      - "/home/johndoe/Backups:/backups"
-```
-
-
-
-
-There are also some variables in the environment section. Many of these don't need to be edited, but here are the ones you might want to change:
 | Environment Variable  |Meaning|
 |---|---|
-| POSTGRES_DB | This is the name of the database from the previous step. Can also be a comma/space separated list of database names if you create more in the future |
-| POSTGRES_USER | This is the database username from the previous step |
-| POSTGRES_PASSWORD | This is the database password from the previous step |
-| SCHEDULE | This is a [cron string](https://www.freeformatter.com/cron-expression-generator-quartz.html) for how often backups are created. can be "@daily", "@every 1h", etc |
-| BACKUP_KEEP_DAYS | Number of daily backups to keep before removal.
-| BACKUP_KEEP_WEEKS | Number of weekly backups to keep before removal.
-| BACKUP_KEEP_MONTHS | Number of daily backups to keep before removal.
-| TZ                | This is your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
+| SCHEDULE            | This is a [cron string](https://www.freeformatter.com/cron-expression-generator-quartz.html) for how often backups are created. can be "@daily", "@every 1h", etc |
+| BACKUP_KEEP_DAYS    | Number of daily backups to keep before removal.  |
+| BACKUP_KEEP_WEEKS   | Number of weekly backups to keep before removal.  |
+| BACKUP_KEEP_MONTHS  | Number of daily backups to keep before removal.  |
+| BACKUP_LOCATION     | Location your backups will be stored. See [Volume Locations](#volume-locations) |
+
+### PGAdmin
+To configure PGAdmin, we'll want to configure the variables below:
+| Environment Variable  |Meaning|
+|---|---|
+| PGADMIN_DEFAULT_EMAIL     | Email used for PGAdmin login. Default is "admin@admin.com"  |
+| PGADMIN_DEFAULT_PASSWORD  | Password used for PGAdmin login. Default is "root"  |
+| PGADMIN_PORT              | String configuring port to expose PGAdmin on. Syntax is "YOUR_PORT:80"  |
+
+### Volume Locations
+The location of your database and backups depend on what platform you are installing on. You will need the full path to the folder you want them stored in. On a QNAP NAS for example, if I wanted to use a folder called "Backups" inside a shared folder named "Videos" for my backups location, the path would be ```/shares/Videos/Backups/```, and my ```BACKUP_LOCATION``` value would look like this:
+```yaml
+BACKUP_LOCATION: &bk-location "/shares/Videos/Backups/:/backups"
+```
+ On Ubuntu, if I wanted to use a folder named "database" in the home directory of the user named "johndoe" for my database location, the path would be ```/home/johndoe/database/```, and my ```POSTGRES_LOCATION``` value would look like this:
+```yaml
+POSTGRES_LOCATION: &db-location "johndoe/database/:/var/lib/postgresql/data"
+```
+
+I recommend putting your database on an SSD, your access speed will be noticeably slower on a spinning drive.
 
 Once you have configured these settings, save your modified docker-compose.yml file and move on to installation!
 
