@@ -64,7 +64,21 @@ services:
       <<: [*admin-environment]
     ports:
       - *pgadmin-port
+    volumes:
+      - pgadmin-config/servers.json:/pgadmin4/servers.json:ro
     depends_on:
       - postgres
+      - pgadmin-config
     healthcheck:
       test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost/ || exit 1"]
+  pgadmin-config:
+    container_name: resolve_pgadmin-config-creator
+    image: ghcr.io/elliotmatson/pgadmin-config-creator:latest
+    restart: always
+    environment:
+      <<: [*db-environment]
+    volumes:
+      - pgadmin-config:/config
+
+volumes:
+  pgadmin-config:
