@@ -15,7 +15,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: pgadmin-config-creator
+  IMAGE_NAME: elliotmatson/pgadmin-config-creator
 
 jobs:
   build-and-push-image:
