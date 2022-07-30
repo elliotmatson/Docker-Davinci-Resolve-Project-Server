@@ -13,6 +13,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Deploy the stack, timeout if not healthy after 2m
         run: timeout 120 docker compose up --wait
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      - name: Check creating database
+        run: docker compose logs | grep "CREATE DATABASE"
+      - name: Check database creation
+        run: docker compose logs | grep "Success. You can now start the database server"
+      - name: Check postgres init
+        run: docker compose logs | grep "PostgreSQL init process complete; ready for start up."
