@@ -15,7 +15,7 @@ on:
   push:
     branches: ['dev']
   release:
-    types: [published]
+    types: [published, edited]
 
 env:
   REGISTRY: ghcr.io
