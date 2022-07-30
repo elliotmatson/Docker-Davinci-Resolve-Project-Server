@@ -46,7 +46,7 @@ services:
     restart: always
     volumes:
       - *bk-location
-    links:
+    depends_on:
       - postgres
     environment:
       <<: [*db-environment, *backup-environment]
@@ -54,6 +54,8 @@ services:
       POSTGRES_EXTRA_OPTS: --blobs --format=custom --quote-all-identifiers
       BACKUP_SUFFIX: .backup
       HEALTHCHECK_PORT: 8080
+    healthcheck:
+      interval: 30s
   pgadmin:
     container_name: resolve_pgadmin
     image: dpage/pgadmin4
@@ -62,5 +64,7 @@ services:
       <<: [*admin-environment]
     ports:
       - *pgadmin-port
+    depends_on:
+      - postgres
     healthcheck:
       test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost/ || exit 1"]

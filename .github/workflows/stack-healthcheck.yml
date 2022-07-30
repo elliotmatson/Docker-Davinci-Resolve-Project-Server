@@ -12,10 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy the stack
-        run: docker-compose up -d
-
-      - name: Test PGAdmin
-        run: docker run --network container:resolve_pgadmin appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost/
+        run: timeout 5 docker-compose up -d
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
