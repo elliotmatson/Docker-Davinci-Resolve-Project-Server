@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy the stack, timeout if not healthy after 2m
-        run: timeout 120 docker compose up --wait
+        run: timeout 120 docker compose up --quiet-pull --wait
       - name: Check creating database
         run: docker compose logs | grep "CREATE DATABASE"
       - name: Check database creation

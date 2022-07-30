@@ -4,3 +4,4 @@ RUN mkdir /config
 ADD . /app
 WORKDIR /app
 CMD ["python", "app.py"]
+HEALTHCHECK CMD test -f /config/servers.json || exit 1
