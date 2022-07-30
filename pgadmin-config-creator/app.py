@@ -5,7 +5,7 @@ import time
 with open('/config/servers.json', 'w') as f:
     print("created " + f.name)
     template_string =   ('{"Servers": {"1": {"Name": "DavinciResolve", '
-                        '"Group": "Servers", "Port": 5432, "Username": ''
+                        '"Group": "Servers", "Port": 5432, "Username": '
                         '"postgres", "Host": "postgres", "SSLMode": "prefer", "MaintenanceDB": "postgres"}}}'
                         )
     data = json.loads(template_string)

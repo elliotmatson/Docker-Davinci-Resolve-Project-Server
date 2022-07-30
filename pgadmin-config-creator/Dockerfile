@@ -1,5 +1,6 @@
 FROM python:3.8-alpine
-RUN mkdir -p /{app,config}
+RUN mkdir /app
+RUN mkdir /config
 COPY . /app
 WORKDIR /app
 CMD ["python", "app.py"]
