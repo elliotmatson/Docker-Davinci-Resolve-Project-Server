@@ -17,7 +17,6 @@ x-common:
     PGADMIN_DEFAULT_EMAIL: admin@admin.com
     PGADMIN_DEFAULT_PASSWORD: root
     PGADMIN_PORT: &pgadmin-port "3001:80"
-    PGADMIN_SERVER_JSON_FILE: /pgadmin4-config/servers.json
 #
 # ------------------------------------------------------------------------------------------
 # DANGER ZONE BELOW
@@ -79,6 +78,7 @@ services:
     restart: on-failure
     environment:
       <<: [*db-environment]
+      - PGADMIN_SERVER_JSON_FILE: /pgadmin4-config/servers.json
     volumes:
       - pgadmin-config:/config
 
