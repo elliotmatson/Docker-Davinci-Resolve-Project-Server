@@ -2,6 +2,12 @@ import json
 import os
 import time
 
+# quit if config file already exists
+if os.path.exists("/config/servers.json"):
+    print("/config/servers.json already exists. Quitting...")
+    quit()
+
+
 # open json file in docker volume
 with open("/config/servers.json", "w") as f:
     print("created " + f.name)
@@ -18,6 +24,8 @@ with open("/config/servers.json", "w") as f:
     print(data)
     # update config file
     json.dump(data, f, indent=2)
+
+
 # Sleep until GHA Healthchecks are complete.
 # I'm sure there's a better way to get this to not
 # stall a docker-compose up --wait, but I don't know
