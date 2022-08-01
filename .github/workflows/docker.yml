@@ -12,8 +12,6 @@
 name: Docker Build, Push
 
 on:
-  push:
-    branches: ['dev']
   release:
     types: [published, edited]
   workflow_dispatch:
