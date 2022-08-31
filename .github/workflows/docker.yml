@@ -15,6 +15,11 @@ on:
   release:
     types: [published, edited]
   workflow_dispatch:
+  
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: elliotmatson/pgadmin-config-creator
+  DOCKER_IMAGE: elliotmatson/docker-davinci-resolve-project-server
 
 jobs:
   build-and-push-image:
@@ -51,8 +56,8 @@ jobs:
         uses: docker/metadata-action@69f6fc9d46f2f8bf0d5491e4aabe0bb8c6a4678a
         with:
           images: |
-            ghcr.io/elliotmatson/pgadmin-config-creator
-            elliotmatson/docker-davinci-resolve-project-server
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            ${{ env.DOCKER_IMAGE }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
