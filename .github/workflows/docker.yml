@@ -19,7 +19,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: elliotmatson/pgadmin-config-creator
-  DOCKER_IMAGE: elliotmatson/docker-davinci-resolve-project-server
+  DOCKER_IMAGE: elliotmatson/pgadmin-config-creator
 
 jobs:
   build-and-push-image:
