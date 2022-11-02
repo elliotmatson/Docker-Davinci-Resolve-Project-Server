@@ -3,7 +3,7 @@ version: '3.8'
 x-common:
   database: &db-environment
     POSTGRES_DB: database
-    POSTGRES_USER: postgres
+    POSTGRES_USER: &pg-user postgres
     POSTGRES_PASSWORD: DaVinci
     TZ: America/Chicago
     POSTGRES_LOCATION: &db-location "~/db:/var/lib/postgresql/data"
@@ -37,7 +37,7 @@ services:
     volumes:
       - *db-location
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ["CMD", "pg_isready", "-U", *pg-user]
       interval: 10s
       timeout: 5s
       retries: 5
