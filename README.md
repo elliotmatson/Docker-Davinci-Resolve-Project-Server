@@ -62,7 +62,8 @@ x-common:
 To configure the server itself, we'll want to configure the environment variables below:
 | Environment Variable  |Meaning|
 |---|---|
-| POSTGRES_DB       | Nme of your database. Name it whatever you like. |
+| POSTGRES_DB       | Na
+me of your database. Name it whatever you like. |
 | POSTGRES_USER     | Username you will use to connect to your database. The Resolve default is "postgres"  |
 | POSTGRES_PASSWORD | Password you will use to connect to your database. The Resolve default is "DaVinci"  |
 | TZ                | Your timezone, here is [a list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)|
