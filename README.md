@@ -41,7 +41,7 @@ version: '3.8'
 x-common:
   database: &db-environment
     POSTGRES_DB: database
-    POSTGRES_USER: postgres
+    POSTGRES_USER: &pg-user postgres
     POSTGRES_PASSWORD: DaVinci
     TZ: America/Chicago
     POSTGRES_LOCATION: &db-location "???:/var/lib/postgresql/data"
@@ -75,7 +75,7 @@ To configure the backups, we'll want to configure the variables below:
 | SCHEDULE            | This is a [cron string](https://www.freeformatter.com/cron-expression-generator-quartz.html) for how often backups are created. can be "@daily", "@every 1h", etc |
 | BACKUP_KEEP_DAYS    | Number of daily backups to keep before removal.  |
 | BACKUP_KEEP_WEEKS   | Number of weekly backups to keep before removal.  |
-| BACKUP_KEEP_MONTHS  | Number of daily backups to keep before removal.  |
+| BACKUP_KEEP_MONTHS  | Number of monthly backups to keep before removal.  |
 | BACKUP_LOCATION     | Location your backups will be stored. See [Volume Locations](#volume-locations) |
 
 ### PGAdmin
@@ -120,7 +120,7 @@ See [#5](https://github.com/elliotmatson/Docker-Davinci-Resolve-Project-Server/i
 3. Move your modified docker-compose.yml file to a folder on your Linux machine, then navigate to that folder in the terminal.
 4. Run:
 ```docker-compose up -d```
-5. Docker-compose will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your QNAP using the database name and credentials
+5. Docker-compose will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your Linux Server instance using the database name and credentials
 
 
 ## Different PostgreSQL versions
