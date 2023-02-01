@@ -25,6 +25,7 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
+      security-events: write
       contents: read
       packages: write
 
@@ -73,12 +74,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  security-scan:
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-    needs: build-and-push-image
-    steps:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
