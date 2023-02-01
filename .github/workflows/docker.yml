@@ -73,13 +73,18 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    needs: build-and-push-image
+    steps:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ env.DOCKER_IMAGE }}
           format: 'sarif'
           output: 'trivy-results.sarif'
-
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
