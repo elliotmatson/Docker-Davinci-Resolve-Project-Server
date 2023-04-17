@@ -66,7 +66,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@817ed59f97d2974e2c1d92f170242f52fd3feae4
+        uses: docker/build-push-action@eafaea8d0f5853934deece2ffa67af59d936562b
         with:
           context: ./pgadmin-config-creator
           platforms: linux/amd64,linux/arm64,linux/arm/v7
