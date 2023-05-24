@@ -67,6 +67,8 @@ services:
       - *pgadmin-port
     volumes:
       - pgadmin-config:/pgadmin4-config
+      - pgadmin:/var/lib/pgadmin
+      - *bk-location
     depends_on:
       - postgres
       - pgadmin-config
@@ -84,3 +86,4 @@ services:
 
 volumes:
   pgadmin-config:
+  pgadmin:
