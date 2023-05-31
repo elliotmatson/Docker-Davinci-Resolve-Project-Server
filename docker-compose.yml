@@ -69,13 +69,13 @@ services:
       - pgadmin-config:/pgadmin4-config
       - pgadmin:/var/lib/pgadmin
       - *bk-location
+    entrypoint: "/bin/sh"
     command: 
-      - /bin/sh
       - -c
       - |
-        'mkdir /var/lib/pgadmin/storage/$${PGADMIN_DEFAULT_EMAIL//@/_}/'
-        'ln -s /backups /var/lib/pgadmin/storage/$${PGADMIN_DEFAULT_EMAIL//@/_}/'
-        '/entrypoint.sh'
+        mkdir -p /var/lib/pgadmin/storage/$${PGADMIN_DEFAULT_EMAIL//@/_}/
+        ln -s /backups /var/lib/pgadmin/storage/$${PGADMIN_DEFAULT_EMAIL//@/_}/
+        /entrypoint.sh
     depends_on:
       - postgres
       - pgadmin-config
