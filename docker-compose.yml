@@ -67,6 +67,15 @@ services:
       - *pgadmin-port
     volumes:
       - pgadmin-config:/pgadmin4-config
+      - pgadmin:/var/lib/pgadmin
+      - *bk-location
+    entrypoint: "/bin/sh"
+    command: 
+      - -c
+      - |
+        mkdir -p /var/lib/pgadmin/storage/$${PGADMIN_DEFAULT_EMAIL//@/_}/
+        ln -s /backups /var/lib/pgadmin/storage/$${PGADMIN_DEFAULT_EMAIL//@/_}/
+        /entrypoint.sh
     depends_on:
       - postgres
       - pgadmin-config
@@ -84,3 +93,4 @@ services:
 
 volumes:
   pgadmin-config:
+  pgadmin:
