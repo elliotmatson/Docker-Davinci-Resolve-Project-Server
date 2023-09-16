@@ -28,7 +28,7 @@ x-common:
 services:
   postgres:
     container_name: resolve_pgsql
-    image: postgres:13
+    image: postgres:16
     restart: always
     ports:
       - "5432:5432"
