@@ -2,21 +2,21 @@
 version: '3.8'
 x-common:
   database: &db-environment
-    POSTGRES_DB: database
-    POSTGRES_USER: &pg-user postgres
-    POSTGRES_PASSWORD: DaVinci
-    TZ: America/Chicago
-    POSTGRES_LOCATION: &db-location "~/db:/var/lib/postgresql/data"
+    POSTGRES_DB: ${POSTGRES_DB}
+    POSTGRES_USER: &pg-user ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    TZ: ${TZ}
+    POSTGRES_LOCATION: &db-location ${POSTGRES_LOCATION}
   backup: &backup-environment
-    SCHEDULE: "@daily"
-    BACKUP_KEEP_DAYS: 7
-    BACKUP_KEEP_WEEKS: 4
-    BACKUP_KEEP_MONTHS: 6
-    BACKUP_LOCATION: &bk-location "~/backups:/backups"
+    SCHEDULE: ${SCHEDULE}
+    BACKUP_KEEP_DAYS: ${BACKUP_KEEP_DAYS}
+    BACKUP_KEEP_WEEKS: ${BACKUP_KEEP_WEEKS}
+    BACKUP_KEEP_MONTHS: ${BACKUP_KEEP_MONTHS}
+    BACKUP_LOCATION: &bk-location ${BACKUP_LOCATION}
   admin: &admin-environment
-    PGADMIN_DEFAULT_EMAIL: admin@admin.com
-    PGADMIN_DEFAULT_PASSWORD: root
-    PGADMIN_PORT: &pgadmin-port "3001:80"
+    PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+    PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    PGADMIN_PORT: &pgadmin-port ${PGADMIN_PORT}
 #
 # ------------------------------------------------------------------------------------------
 # DANGER ZONE BELOW
