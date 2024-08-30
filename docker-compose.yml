@@ -1,5 +1,5 @@
 ---
-version: '3.8'
+version: '3.9'
 x-common:
   database: &db-environment
     POSTGRES_DB: ${POSTGRES_DB}
@@ -35,7 +35,7 @@ services:
     volumes:
       - ${POSTGRES_PATH}:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      test: ["CMD", "psql", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}", "-c", "SELECT 1"]
       interval: 10s
       timeout: 5s
       retries: 5
