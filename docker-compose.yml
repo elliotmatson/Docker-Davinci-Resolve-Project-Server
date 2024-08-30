@@ -35,7 +35,7 @@ services:
     volumes:
       - ${POSTGRES_PATH}:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", *pg-user]
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
