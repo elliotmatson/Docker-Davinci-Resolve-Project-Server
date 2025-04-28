@@ -6,13 +6,13 @@ x-common:
     POSTGRES_USER: &pg-user postgres
     POSTGRES_PASSWORD: DaVinci
     TZ: America/Chicago
-    POSTGRES_LOCATION: &db-location "~/db:/var/lib/postgresql/data"
+    POSTGRES_LOCATION: &db-location "./db:/var/lib/postgresql/data"
   backup: &backup-environment
     SCHEDULE: "@daily"
     BACKUP_KEEP_DAYS: 7
     BACKUP_KEEP_WEEKS: 4
     BACKUP_KEEP_MONTHS: 6
-    BACKUP_LOCATION: &bk-location "~/backups:/backups"
+    BACKUP_LOCATION: &bk-location "./backups:/backups"
   admin: &admin-environment
     PGADMIN_DEFAULT_EMAIL: admin@admin.com
     PGADMIN_DEFAULT_PASSWORD: root
