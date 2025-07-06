@@ -2,7 +2,7 @@
 version: '3.8'
 x-common:
   database: &db-environment
-    POSTGRES_DB: database
+    POSTGRES_DB: &pg-db database
     POSTGRES_USER: &pg-user postgres
     POSTGRES_PASSWORD: DaVinci
     TZ: America/Chicago
@@ -37,7 +37,7 @@ services:
     volumes:
       - *db-location
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", *pg-user]
+      test: ["CMD", "pg_isready", "-U", *pg-user, "-d", *pg-db]
       interval: 10s
       timeout: 5s
       retries: 5
