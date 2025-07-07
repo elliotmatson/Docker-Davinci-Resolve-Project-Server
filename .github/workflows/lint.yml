@@ -28,6 +28,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter/slim@v7
         env:
+          VALIDATE_RENOVATE: false
           FIX_YAML_PRETTIER: true
           FIX_MARKDOWN_PRETTIER: true
           FIX_MARKDOWN: true
