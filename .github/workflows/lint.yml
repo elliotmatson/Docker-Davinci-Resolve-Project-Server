@@ -2,16 +2,22 @@
 name: Lint
 on:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
 
-permissions: read-all
+permissions: {}
 
 jobs:
   run-lint:
     name: Lint
     runs-on: ubuntu-latest
+
+    permissions:
+      # to fix any linting issues
+      contents: write
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+      
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -22,7 +28,6 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter/slim@v7
         env:
-          VALIDATE_ALL_CODEBASE: false
           FIX_YAML_PRETTIER: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
