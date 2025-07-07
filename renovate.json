@@ -9,7 +9,7 @@
     {
       "matchDepTypes": ["devDependencies"],
       "automerge": true,
-      "matchPackagePatterns": ["/lint/", "/prettier/"]
+      "matchPackagePatterns": ["//lint//", "//prettier//"]
     },
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
