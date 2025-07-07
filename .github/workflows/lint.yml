@@ -29,5 +29,9 @@ jobs:
         uses: github/super-linter/slim@v7
         env:
           FIX_YAML_PRETTIER: true
+          FIX_MARKDOWN_PRETTIER: true
+          FIX_MARKDOWN: true
+          FIX_JSON_PRETTIER: true
+          FIX_JSON: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
