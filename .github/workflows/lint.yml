@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: github/super-linter@v7
+        uses: github/super-linter/slim@v7
         env:
           VALIDATE_ALL_CODEBASE: false
           FIX_YAML_PRETTIER: true
