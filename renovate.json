@@ -8,8 +8,8 @@
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": ["/lint/", "/prettier/"],
-      "automerge": true
+      "automerge": true,
+      "matchPackagePatterns": ["/lint/", "/prettier/"]
     },
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
