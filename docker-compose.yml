@@ -63,6 +63,7 @@ services:
     restart: always
     environment:
       <<: [*admin-environment]
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4-config/servers.json
     ports:
       - *pgadmin-port
     volumes:
@@ -91,7 +92,6 @@ services:
     restart: on-failure
     environment:
       <<: [*db-environment]
-      PGADMIN_SERVER_JSON_FILE: /pgadmin4-config/servers.json
     volumes:
       - pgadmin-config:/config
 
