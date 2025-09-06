@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=elliotmatson&project=Docker-Davinci-Resolve-Project-Server&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 # Davinci Resolve Project Server
 
 ![Lint](https://github.com/elliotmatson/Docker-Davinci-Resolve-Project-Server/actions/workflows/lint.yml/badge.svg)
