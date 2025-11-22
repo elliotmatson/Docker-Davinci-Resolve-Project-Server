@@ -138,7 +138,7 @@ See [this discussion](https://github.com/elliotmatson/Docker-Davinci-Resolve-Pro
 
 ## Different PostgreSQL versions
 
-Generally, Resolve is not very tolerant of mismatched PostgreSQL versions. Resolve 18 uses PostgreSQL 13, which is what this repository now defaults to. Resolve 17 and below use PostgreSQL 9.5. Unfortunately the major release 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure.
+Generally, Resolve is not very tolerant of mismatched PostgreSQL versions. Resolve 18-20 use PostgreSQL 13, which is what this repository now defaults to. Resolve 17 and below use PostgreSQL 9.5. Unfortunately the major release 9.5 is EOL, and 9.5.4 in particular has a lot of vulnerabilities that make it insecure.
 Since most people are still using the default Resolve credentials for their server, security generally isn't the biggest concern, but if you are trying to secure your project server with an older version of Resolve, you will want to move to a supported version of PostgreSQL.
 
 Resolve 17 and below still use a legacy feature that has been removed in PostgreSQL 12, so the latest major version that is useable is 11, which will be maintained until November 9, 2023.
