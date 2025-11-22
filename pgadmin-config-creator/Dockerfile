@@ -1,4 +1,4 @@
-FROM python:3.14-alpine
+FROM python:3.14-slim
 
 RUN useradd -m pgadmin-config-creator
 USER pgadmin-config-creator
