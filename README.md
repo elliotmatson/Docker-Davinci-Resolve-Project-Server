@@ -133,7 +133,7 @@ See [this discussion](https://github.com/elliotmatson/Docker-Davinci-Resolve-Pro
 2. Install [Docker Compose](https://docs.docker.com/compose/install/)
 3. Move your modified docker-compose.yml file to a folder on your Linux machine, then navigate to that folder in the terminal.
 4. Run:
-   `docker-compose up -d`
+   `docker compose up -d`
 5. Docker-compose will download the files it needs and start the app. Once it's done, you should be able to connect Resolve to the IP address of your Linux Server instance using the database name and credentials
 
 ## Different PostgreSQL versions
